@@ -46,8 +46,9 @@ app.get('/api', function api_index(req, res) {
     base_url: "https://desolate-dawn-69192.herokuapp.com/", 
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "My basic info"}, // CHANGE ME
+      {method: "GET", path: "/api/artists", description: "My favorite artists"},
+      {method: "POST", path: "/api/artists", description: "Add an artist"} // CHANGE ME
     ]
   });
 });
@@ -62,9 +63,13 @@ app.get('/api/profile', function (req, res){
     family_members: [
       {name: "Bob", relationship: "Father"},
       {name: "Luke", relationship: "Brother"}
+    ],
+    pets: [
+      {name: "Lola", breed: "Border Collie", age: "1 year"}
     ]
   });
 });
+
 
 // end my code//
 
