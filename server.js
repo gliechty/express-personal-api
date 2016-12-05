@@ -54,7 +54,17 @@ app.get('/api', function api_index(req, res) {
 
 // my code//
 
-// app.get('/api/', );
+app.get('/api/profile', function (req, res){
+  res.json({
+    name: "Guy Liechty",
+    github_link: "https://github.com/gliechty/",
+    home_town: "Denver, Colorado",
+    family_members: [
+      {name: "Bob", relationship: "Father"},
+      {name: "Luke", relationship: "Brother"}
+    ]
+  });
+});
 
 // end my code//
 
