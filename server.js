@@ -96,14 +96,17 @@ app.get('/api/artists/:id', function show(req, res){
 
 // Artists - POST create an artist
 app.post('/api/artists', function create(req, res){
-  var newArtist = new db.Artist(req.body);
-  console.log(req.body);
-  // id: Number,
-  newArtist.save(function(err, artist){
-    if (err) { return console.log("err : "+err);}
-    console.log("created " + artist.name);
-    res.json(artist);
-  });
+  // var newArtist = new db.Artist(req.body);
+  // console.log(req.body);
+  // // id: Number,
+  // newArtist.save(function(err, artist){
+  //   if (err) { return console.log("err : "+err);}
+  //   console.log("created " + artist.name);
+  //   res.json(artist);
+  // });
+  Artist.create({name: req.body.name, genre: req.body.genre}), function (err, nerd){
+    res.json(nerd);
+  };
 });
 
 
