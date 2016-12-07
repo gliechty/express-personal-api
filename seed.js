@@ -3,13 +3,14 @@
 
 var db = require('./models');
 
-var new_campsite = {description: "Sharp rocks. Middle of nowhere."};
+var new_artist = {name: "Bob Dylan", genre: "Rock"};
 
-db.Campsite.create(new_campsite, function(err, campsite){
+db.Artist.create(new_artist, function(err, artist){
   if (err){
     return console.log("Error:", err);
   }
 
-  console.log("Created new campsite", campsite._id);
+  console.log("Created new artist", artist._id);
   process.exit(); // we're all done! Exit the program.
 });
+
