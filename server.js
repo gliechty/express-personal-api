@@ -1,6 +1,6 @@
 // require express and other modules
 var express = require('express'),
-    app = express();
+app = express();
 
 // parse incoming urlencoded form data
 // and populate the req.body object
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 var db = require('./models');
 
 // console.log("server js is running");
-var artists = db.Artist.find();
+// var artists = db.Artist.find(); //changed to artists from Artist
 
 /**********
  * ROUTES *
@@ -57,7 +57,7 @@ app.get('/api', function index(req, res) {
 
 // my code//
 
-// Profile - GET
+// Profile - GET Profile
 app.get('/api/profile', function index(req, res){
   res.json({
     name: "Guy Liechty",
@@ -73,7 +73,7 @@ app.get('/api/profile', function index(req, res){
   });
 });
 
-// Artists - GET (all)
+// Artists - GET (Artists)
 app.get('/api/artists', function index(req, res){
   db.Artist.find(function(err, artists){
     if (err) {return console.log("index error: " + err); }
@@ -81,48 +81,29 @@ app.get('/api/artists', function index(req, res){
   });
 });
 
-// Artists Get (one)
+// Artists Get (artist by id)
 app.get('/api/artists/:id', function show(req, res){
-  var artists = db.Artist.find();
-  console.log(artists);
-  var request = req.body.name;
-  console.log(req.body.name);
-  for (i=0; i<artists.length;i++){
-    if (artists[i].name == request){
-      res.json(artists[i]);
-    }
-  }
+  db.Artist.findById(req.params.id, function(err, artist){
+    if(err) {return console.log("show err: " + err);}
+    res.json(artist);
+  });
 });
+
 
 // Artists - POST create an artist
-app.post('/api/artists', function create(req, res){
-  // var newArtist = new db.Artist(req.body);
-  // console.log(req.body);
-  // // id: Number,
-  // newArtist.save(function(err, artist){
-  //   if (err) { return console.log("err : "+err);}
-  //   console.log("created " + artist.name);
-  //   res.json(artist);
-  // });
-  Artist.create({name: req.body.name, genre: req.body.genre}), function (err, nerd){
-    res.json(nerd);
-  };
+app.post('/api/artists', function (req, res){
+  // var newArtist = new db.Artist({"name": req.body.name, "genre": req.body.genre});
+  var newArtist = new db.Artist({});
+  newArtist.name=req.body.name;
+  newArtist.genre=req.body.genre;
+  console.log(newArtist);
+  newArtist.save(function(err, artist){
+    if (err) {return console.log("error for you Guy: ", err);}
+    console.log("created ", artist.name);
+    res.json(artist);
+  });
 });
 
-
-// Artists - PATCH
-// app.patch('/api/artists', function patch(req, res){
-//   // var name = req.params.name;
-//   // for (i=0, i<artists.length; i++){
-//   //   if (artists[i].name == name){
-//   //     artists[i].name=
-//   //   }
-//   // }
-// });
-
-// Artists - DELETE
-
-// end my code//
 
 /**********
  * SERVER *

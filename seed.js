@@ -15,7 +15,7 @@ artistList.push({
 	});
 artistList.push({
 	name: "Isaac Hayes",
-	gernre: "Soul"
+	genre: "Soul"
 });
 
 db.Artist.remove({}, function(err, artists){
@@ -26,19 +26,4 @@ db.Artist.remove({}, function(err, artists){
 		process.exit();
 	});
 });
-
-
-
-// app.get('/api/artists', function artist_index(req, res){
-// 	console.log("seeding json");
-// 	res.json({})
-// })
-// 	db.Artist.create(new_artist, function(err, artist){
-//   	if (err){
-//     return console.log("Error:", err);
-//   }
-
-//   console.log("Created new artist", artist._id);
-//   process.exit(); // we're all done! Exit the program.
-// });
 
